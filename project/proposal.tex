@@ -1,0 +1,115 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{times}
+\usepackage[pdftex]{graphicx,color}
+\usepackage[colorlinks=false,pdfborder=000]{hyperref}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{titling}
+\usepackage[top=1.2in, bottom=1.2in, left=1.2in, right=1.2in]{geometry}
+\usepackage{comment}
+\usepackage{subfigure}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary {snakes,arrows}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\CSE}{\href{http://www.cse.cuhk.edu.hk}{Department of Computer Science and
+Engineering}}
+\newcommand{\CUHK}{\href{http://www.cuhk.edu.hk}{The Chinese University of Hong Kong}}
+\newcommand{\mymail}{\mbox{\textcolor{blue}{\underline{zgxiao@cse.cuhk.edu.hk}}}}
+\newcommand{\myname}{\href{http://www.cse.cuhk.edu.hk/~zgxiao}{XIAO Zigang}}
+\newcommand{\header}[1]{\noindent {\bf \\#1\\}}
+\newcommand{\NE}{Nash Equilibrium }
+\newcommand{\tot}{\frac{2}{3}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% modify the font size of title, author and date
+\pretitle{\begin{center}\bf \Huge} \posttitle{\par\end{center}}
+\preauthor{\begin{center}
+            \small \small \lineskip 0.5em%
+            \begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}}
+\predate{\begin{center}\small} \postdate{\par\end{center}}
+
+\title{CSC5240 Project Proposal\\\Large Droplet Routing and Manipulation for Cross-Referencing Digital Microfluidic Biochip}
+\author{\myname\\\mymail\\\CSE\\\CUHK}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\bibliographystyle{unsrt}
+\maketitle
+\abstract{Digital Microfluidic Biochip (DMFB) has drawn lots of attention nowadays,
+ especially the \textit{cross-referencing biochip}.
+Due to electrode constraint, the manipulation of droplets to avoid electrode interference becomes crucial in droplet routing.
+This project tries to solve this problem by using constraint satisfaction technique.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+Digital Microfluidic Biochip has been receiving more and more attention nowadays.
+It is crucial in medical, pharmaceutical and environmental monitoring applications \cite{verpoorte2003mmm}.
+The discrete objects we want to operate on chip are called \textit{droplets}.
+Analogous to VLSI synthesis, a top-down approach can be applied to biochip design,
+and \textit{droplet routing} is one of the important steps in biochip synthesis.
+The goal is to route a set of droplets from their \textit{source} to their \textit{sink}.
+
+Currently, there exist two kinds of techniques to manipulate droplets movement.
+The first one is \textit{direct-addressing},
+in which an electrode is fixed under each cell of the chip.
+It is simple, yet expensive and rather limited for large scale product.
+Another more promising method is \textit{cross-referencing},
+which applies high/low voltage to a row electrode and a column electrode
+in order to activate the cell in their intersection point.
+However, because the activation of a cell is in a row-column manner,
+which means \textit{extra cells} may be activated when multiple rows/columns are addressed.
+We call it \textit{electrode interference} and it imposes \textit{electrode constraint} on droplet routing.
+The objective of \textit{Droplet Routing and Manipulation in Cross-Referencing Digital Microfluidic Biochip}
+is to route the droplets and minimize the droplet routing time while not violating the electrode constraint.
+
+\section{Literature Review}
+The earliest article about droplet routing problem can be found in \cite{bohringer2003osm},
+in which the author used a \textit{robotic} viewpoint to solve routing.
+\cite{bohringer2006mac}\cite{1326232}\cite{1353672} use \textit{$A*$ search,network flow} and \textit{bypassibility} heuristic to generate routes.
+However, none of them considered cross-referencing.
+Cross-referencing routing is first considered in \cite{bohringer2003osm},but no concrete algorithm is given.
+Currently there are only three papers handle droplet routing and cross-referencing manipulation at the same time.
+\cite{griffith2006pcr} reduces the problem to a \textit{graph-coloring} problem.
+\cite{1266484} transform the problem to a \textit{maximum clique partition} problem.
+Both of them adapts the 1st approach which will be mentioned later.
+\cite{yuh2008pib} first deals with the problem using 2nd approach in next section.
+More specifically, it uses a \textit{progressive linear programming} with heuristic at each step to get a near-optimal solution.
+
+\section{Problem Formulation}
+There is a \text{route} for each droplet. Nevertheless,
+these routes are \textit{virtual routes} which are different from those in VLSI design,
+since they can \textit{intersect} with each other,
+and we only need to ensure the droplets would not ``crash'' each other at the intersection point.
+
+Each droplet can be interpreted as a moving robot.
+Then the routing problem can be reduced to \textit{motion planning} problem in robotics research.
+It is proved to be NP-hard by Erdmann et al.\cite{erdmannmovingobj}.
+
+Moreover, because of \textit{electrode interference},
+it is almost impossible to accomplish the parallel moving of droplet, which can be easily achieved in direct-addressing biochip.
+In this project we are going to explore the possibility of solving this problem by using \textit{constraint programming} technique.
+
+\section{Implementation Plan}
+There are at least two different approaches to attack this problem.
+\begin{enumerate}
+  \item View droplet routing and droplet manipulation as two sequential process.
+  The former step's output is the input for the latter step.
+  \item Consider droplet routing while at the same time avoiding electrode interference, i.e.
+  we treat droplet routing and droplet manipulation as a singular process.
+\end{enumerate}
+
+It is intuitive and relative easier to implement the 1st approach.
+However, due to the independence of two process, we can not guarantee to get a \textit{optimal result}.
+We have to \textit{schedule} the droplets' movement at each time step.
+We may even fail in the manipulation step, posing the need to adjust original routes.
+In the 2nd approach, we can ensure that the routes can be generated optimally.
+But without decomposition of two process, the problem becomes much harder.
+
+In this project, both implementation will be tried, though at last maybe only one of them can be feasibly implemented.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% End of Document
+\bibliography{proposal}
+\end{document}

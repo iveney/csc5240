@@ -1,0 +1,366 @@
+% This file was created with JabRef 2.4.1.
+% Encoding: UTF8
+
+@ARTICLE{abrams2003scm,
+  author = {Abrams, A. and Ghrist, R.},
+  title = {State complexes for metamorphic robots},
+  journal = {Arxiv preprint cs/0307004},
+  year = {2003},
+  file = {STATE COMPLEXES FOR METAMORPHIC ROBOTS_abrams2003scm.pdf:STATE COMPLEXES
+	FOR METAMORPHIC ROBOTS_abrams2003scm.pdf:PDF},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{bohringer2006mac,
+  author = {Bohringer, KF},
+  title = {Modeling and Controlling Parallel Tasks in Droplet-Based Microfluidic
+	Systems},
+  journal = {IEEE TRANSACTIONS ON COMPUTER AIDED DESIGN OF INTEGRATED CIRCUITS
+	AND SYSTEMS},
+  year = {2006},
+  volume = {25},
+  pages = {329},
+  number = {2},
+  file = {Karl_Modeling and Controlling Parallel Tasks in Droplet-based Microfluidic
+	Systems_bohringer2006mac.pdf:Karl_Modeling and Controlling Parallel
+	Tasks in Droplet-based Microfluidic Systems_bohringer2006mac.pdf:PDF},
+  owner = {iveney},
+  publisher = {IEEE INSTITUTE OF ELECTRICAL AND ELECTRONICS},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{1308031,
+  author = {Bohringer, K.F.},
+  title = {Towards optimal strategies for moving droplets in digital microfluidic
+	systems},
+  journal = {Robotics and Automation, 2004. Proceedings. ICRA '04. 2004 IEEE International
+	Conference on},
+  year = {2004},
+  volume = {2},
+  pages = {1468-1474 Vol.2},
+  month = {26-May 1,},
+  doi = {10.1109/ROBOT.2004.1308031},
+  file = {Karl_Towards Optimal Strategies for Moving Droplets in Digital Microfluidic
+	Systems_1308031.pdf:Karl_Towards Optimal Strategies for Moving Droplets
+	in Digital Microfluidic Systems_1308031.pdf:PDF},
+  issn = {1050-4729 },
+  keywords = { biocontrol, biological fluid dynamics, cellular biophysics, digital
+	systems, drops, electrophoresis, microfluidics, optimal control,
+	path planning, wetting approximation algorithms, asymptotic complexity,
+	dielectrophoretic effects, digital microfluidic systems, electrowetting
+	effects, flow control, large-scale configurations, moving droplets,
+	optimal control, path planning, planar electrode array, surface array},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@CONFERENCE{bohringer2003osm,
+  author = {Bohringer, K.F.},
+  title = {Optimal strategies for moving droplets in digital microfluidic systems},
+  booktitle = {Seventh International Conference on Miniaturized Chemical and Biochemical
+	Analysis Systems (MicroTAS'03)},
+  year = {2003},
+  file = {Karl_OPTIMAL STRATEGIES FOR MOVING DROPLETS IN DIGITAL MICROFLUIDIC
+	SYSTEMS_bohringer2003osm.pdf:Karl_OPTIMAL STRATEGIES FOR MOVING DROPLETS
+	IN DIGITAL MICROFLUIDIC SYSTEMS_bohringer2003osm.pdf:PDF},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@INPROCEEDINGS{1353672,
+  author = {Minsik Cho and David Z. Pan},
+  title = {A high-performance droplet router for digital microfluidic biochips},
+  booktitle = {ISPD '08 Proceedings of the 2008 international symposium on Physical
+	design},
+  year = {2008},
+  pages = {200--206},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  doi = {httpdoi.acm.org10.11451353629.1353672},
+  file = {08ISPD_Bypassibility_UTexas_1353672.pdf:08ISPD_Bypassibility_UTexas_1353672.pdf:PDF},
+  isbn = {978-1-60558-048-7},
+  location = {Portland, Oregon, USA},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{ding2001smo,
+  author = {Ding, J. and Chakrabarty, K. and Fair, R.B.},
+  title = {{Scheduling of Microfluidic Operations for Reconfigurable Two-Dimensional
+	Electrowetting Arrays}},
+  journal = {IEEE TRANSACTIONS ON COMPUTER AIDED DESIGN OF INTEGRATED CIRCUITS
+	AND SYSTEMS},
+  year = {2001},
+  volume = {20},
+  pages = {1463--1468},
+  number = {12},
+  file = {ding2001smo.pdf:ding2001smo.pdf:PDF},
+  owner = {iveney},
+  publisher = {IEEE INSTITUTE OF ELECTRICAL AND ELECTRONICS},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{erdmannmovingobj,
+  author = {Erdmann, Michael and Lozano-P¨¦rez, Tom¨¢s},
+  title = {On multiple moving objects},
+  journal = {Algorithmica},
+  year = {1987},
+  volume = {2},
+  pages = {477--521},
+  number = {1},
+  month = nov,
+  abstract = {Abstract&nbsp;&nbsp;This paper explores the motion-planning problem
+	for multiple moving objects. The approach taken consists of assigning
+	priorities to the objects, then planning motions one object at a
+	time. For each moving object, the planner constructs a configuration
+	space-time that represents the time-varying constraints imposed on
+	the moving object by the other moving and stationary objects. The
+	planner represents this space-time approximately, using two-dimensional
+	slices. The space-time is then searched for a collision-free path.
+	The paper demonstrates this approach in two domains. One domain consists
+	of translating planar objects; the other domain consists of two-link
+	planar articulated arms.},
+  file = {On Multiple Moving Objects_erdmannmovingobj.pdf:On Multiple Moving
+	Objects_erdmannmovingobj.pdf:PDF},
+  owner = {zgxiao},
+  timestamp = {2008.10.22},
+  url = {http://dx.doi.org/10.1007/BF01840371}
+}
+
+@ARTICLE{1189844,
+  author = {Shih-Kang Fan and Hashi, C. and Chang-Jin Kim},
+  title = {Manipulation of multiple droplets on N×M grid by cross-reference
+	EWOD driving scheme and pressure-contact packaging},
+  journal = {Micro Electro Mechanical Systems, 2003. MEMS-03 Kyoto. IEEE The Sixteenth
+	Annual International Conference on},
+  year = {2003},
+  pages = { 694-697},
+  month = {Jan.},
+  doi = {10.1109/MEMSYS.2003.1189844},
+  file = {Manipulation of Multiple Droplets on NxM Grid   by Cross-Reference
+	EWOD Driving Scheme and Pressure_1189844.pdf:Manipulation of Multiple
+	Droplets on NxM Grid   by Cross-Reference EWOD Driving Scheme and
+	Pressure_1189844.pdf:PDF},
+  issn = {1084-6999 },
+  keywords = {drops, electrophoresis, microfluidics, packaging, wetting creation,
+	cross-reference EWOD driving scheme, cross-reference driving, cutting,
+	electrowetting on dielectric digital microfluidic circuits, large-array
+	chips, merging, mixing, multiple droplets, multiple droplets manipulation,
+	pressure-contact connection, pressure-contact packaging, simultaneous
+	driving, single-layer electrode fabrication, N×,M grid},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{griffith2005cmd,
+  author = {Griffith, E.J. and Akella, S.},
+  title = {Coordinating Multiple Droplets in Planar Array Digital Microfluidic
+	Systems},
+  journal = {The International Journal of Robotics Research},
+  year = {2005},
+  volume = {24},
+  pages = {933},
+  number = {11},
+  file = {05Robotics_Coordinating Multiple Droplets in Planar Array Digital
+	Microuidics Systems_griffith2005cmd .pdf:05Robotics_Coordinating
+	Multiple Droplets in Planar Array Digital Microuidics Systems_griffith2005cmd
+	.pdf:PDF},
+  owner = {iveney},
+  publisher = {Multimedia Archives},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{griffith2006pcr,
+  author = {Griffith, E.J. and Akella, S. and Goldberg, M.K.},
+  title = {Performance Characterization of a Reconfigurable Planar-Array Digital
+	Microfluidic System},
+  journal = {IEEE TRANSACTIONS ON COMPUTER AIDED DESIGN OF INTEGRATED CIRCUITS
+	AND SYSTEMS},
+  year = {2006},
+  volume = {25},
+  pages = {340},
+  number = {2},
+  file = {tcad06_griffith2006pcr.pdf:tcad06_griffith2006pcr.pdf:PDF},
+  owner = {iveney},
+  publisher = {IEEE INSTITUTE OF ELECTRICAL AND ELECTRONICS},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{su2006mpf,
+  author = {Su, F. and Chakrabarty, K.},
+  title = {{Module placement for fault-tolerant microfluidics-based biochips}},
+  journal = {ACM Transactions on Design Automation of Electronic Systems (TODAES)},
+  year = {2006},
+  volume = {11},
+  pages = {682--710},
+  number = {3},
+  file = {su2006mpf.pdf:su2006mpf.pdf:PDF},
+  owner = {iveney},
+  publisher = {ACM New York, NY, USA},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{su2005uhl,
+  author = {Su, F. and Chakrabarty, K.},
+  title = {{Unified high-level synthesis and module placement for defect-tolerant
+	microfluidic biochips}},
+  year = {2005},
+  pages = {825--830},
+  booktitle = {Proceedings of the 42nd annual conference on Design automation},
+  file = {su2005uhl.pdf:su2005uhl.pdf:PDF},
+  organization = {ACM New York, NY, USA},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@CONFERENCE{1382576,
+  author = {Fei Su and Chakrabarty, K.},
+  title = {Architectural-level synthesis of digital microfluidics-based biochips},
+  year = {2004},
+  pages = { 223-228},
+  month = {Nov.},
+  file = {04ICCAD_Architectural-levelSynthesis_Duke_1382576 .pdf:04ICCAD_Architectural-levelSynthesis_Duke_1382576
+	.pdf:PDF},
+  issn = {1092-3152 },
+  journal = {Computer Aided Design, 2004. ICCAD-2004. IEEE/ACM International Conference
+	on},
+  keywords = { biomolecular electronics, circuit CAD, integer programming, integrated
+	circuit design, linear programming, microfluidics, scheduling NP-complete
+	problem, automated drug discovery, classical architectural-level
+	synthesis techniques, clinical diagnostic procedure, digital microfluidics-based
+	biochips, droplet-based digital biochips, human physiological fluids,
+	integer linear programming, massively parallel DNA analysis, multiplexed
+	in-vitro diagnostics, optimal scheduling strategy, real-time biomolecular
+	recognition, scheduling problem},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{1597355,
+  author = {Su, F. and Chakrabarty, K. and Fair, R.B.},
+  title = {Microfluidics-Based Biochips Technology Issues, Implementation Platforms,
+	and Design-Automation Challenges},
+  journal = {Computer-Aided Design of Integrated Circuits and Systems, IEEE Transactions
+	on},
+  year = {2006},
+  volume = {25},
+  pages = { 211-223},
+  number = {2},
+  month = {Feb.},
+  doi = {10.1109TCAD.2005.855956},
+  file = {05TCAD_BioChipIntro_Duke_1597355.pdf:05TCAD_BioChipIntro_Duke_1597355.pdf:PDF},
+  issn = {0278-0070},
+  keywords = {Biochips, design automation, microfluidics, reconfiguration, synthesis,
+	testing},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{dropletrouting,
+  author = {Fei Su and W. Hwang and K. Chakrabarty},
+  title = {Droplet Routing in the Synthesis of Digital Microfluidic Biochips},
+  journal = {Design, Automation and Test in Europe Conference and Exhibition},
+  year = {2006},
+  volume = {1},
+  pages = {73},
+  address = {Los Alamitos, CA, USA},
+  doi = {http://doi.ieeecomputersociety.org/10.1109/DATE.2006.244177},
+  file = {06DATE_DropletRouting(FluidicConstraint)_Duke.pdf:06DATE_DropletRouting(FluidicConstraint)_Duke.pdf:PDF},
+  owner = {iveney},
+  publisher = {IEEE Computer Society},
+  timestamp = {2008.12.13}
+}
+
+@INPROCEEDINGS{1353670,
+  author = {Tao Xu and Krishnendu Chakrabarty},
+  title = {Automated design of digital microfluidic lab-on-chip under pin-count
+	constraints},
+  booktitle = {ISPD '08: Proceedings of the 2008 international symposium on Physical
+	design},
+  year = {2008},
+  pages = {190--198},
+  address = {New York, NY, USA},
+  publisher = {ACM},
+  doi = {http://doi.acm.org/10.1145/1353629.1353670},
+  file = {08ISPD_Automated Design of Digital Microfluidic Lab-on-Chip under
+	Pin-Count Constraints_Duke_1353670.pdf:08ISPD_Automated Design of
+	Digital Microfluidic Lab-on-Chip under Pin-Count Constraints_Duke_1353670.pdf:PDF},
+  isbn = {978-1-60558-048-7},
+  location = {Portland, Oregon, USA},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@INPROCEEDINGS{1266484,
+  author = {Tao Xu and Krishnendu Chakrabarty},
+  title = {A cross-referencing-based droplet manipulation method for high-throughput
+	and pin-constrained digital microfluidic arrays},
+  booktitle = {DATE '07: Proceedings of the conference on Design, automation and
+	test in Europe},
+  year = {2007},
+  pages = {552--557},
+  address = {San Jose, CA, USA},
+  publisher = {EDA Consortium},
+  file = {07DATE_CliquePartition_Duke_1266484.pdf:07DATE_CliquePartition_Duke_1266484.pdf:PDF},
+  isbn = {978-3-9810801-2-4},
+  location = {Nice, France},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{xu2007idr,
+  author = {Xu, T. and Chakrabarty, K.},
+  title = {{Integrated droplet routing in the synthesis of microfluidic biochips}},
+  year = {2007},
+  pages = {948--953},
+  booktitle = {Proceedings of the 44th annual conference on Design automation},
+  file = {DAC2007_xu2007idr.pdf:DAC2007_xu2007idr.pdf:PDF},
+  organization = {ACM Press New York, NY, USA},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@CONFERENCE{yuh2008pib,
+  author = {Yuh, P.H. and Sapatnekar, S. and Yang, C.L. and Chang, Y.W.},
+  title = {A progressive-ILP based routing algorithm for cross-referencing biochips},
+  booktitle = {Design Automation Conference, 2008. DAC 2008. 45th ACM/IEEE},
+  year = {2008},
+  pages = {284--289},
+  file = {08DAC_ProgressiveILP_TWU_yuh2008pib.pdf:08DAC_ProgressiveILP_TWU_yuh2008pib.pdf:PDF},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@INPROCEEDINGS{1326232,
+  author = {Ping-Hung Yuh and Chia-Lin Yang and Yao-Wen Chang},
+  title = {BioRoute: a network-flow based routing algorithm for digital microfluidic
+	biochips},
+  booktitle = {ICCAD '07: Proceedings of the 2007 IEEE/ACM international conference
+	on Computer-aided design},
+  year = {2007},
+  pages = {752--757},
+  address = {Piscataway, NJ, USA},
+  publisher = {IEEE Press},
+  file = {07ICCAD_NetworkFlow_TWU_1326232.pdf:07ICCAD_NetworkFlow_TWU_1326232.pdf:PDF},
+  isbn = {1-4244-1382-6},
+  keywords = {network flow},
+  location = {San Jose, California},
+  owner = {iveney},
+  timestamp = {2008.12.13}
+}
+
+@ARTICLE{zhang2002ihd,
+  author = {Zhang, T. and Chakrabarty, K. and Fair, R.B.},
+  title = {{Integrated hierarchical design of microelectrofluidic systems using
+	SystemC}},
+  journal = {Microelectronics Journal},
+  year = {2002},
+  volume = {33},
+  pages = {459--470},
+  number = {5-6},
+  owner = {iveney},
+  publisher = {Elsevier},
+  timestamp = {2008.12.13}
+}
+

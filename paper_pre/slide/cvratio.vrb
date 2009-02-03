@@ -1,0 +1,10 @@
+\frametitle {Conclusion and future work}
+\begin{itemize}
+  \item Empirical hardness model is valuable for the study of empirical behavior of complex algorithm
+  \item Future work:
+    \begin{enumerate}
+        \item Apply empirical hardness model to stochastic search algorithm
+        \item Build stronger structural/hierachical model
+        \item Study how some features cause instance to be hard or easy for certain types of algorithms
+    \end{enumerate}
+\end{itemize}

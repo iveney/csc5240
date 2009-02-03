@@ -1,0 +1,576 @@
+\documentclass[notheorems,mathserif,table]{beamer}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{graphicx}
+\useoutertheme[height=0.11\textwidth,width=0.15\textwidth,hideothersubsections]{sidebar}
+\usecolortheme{whale}      % Outer color themes, 其他选择: whale, seahorse, dolphin . 换一个编译看看有什么不同.
+\usecolortheme{orchid}     % Inner color themes, 其他选择: lily, orchid
+\useinnertheme[shadow]{rounded} % 对 box 的设置: 圆角、有阴影.
+
+%\setbeamercolor{background canvas}{bg=blue!9} % 背景色, 9%的蓝色. 去掉下一行, 试一试这个.
+\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=structure.fg!25] %%背景色, 上25%的蓝, 过渡到下白.
+\usefonttheme{serif}  % 字体. 个人偏好有轮廓的字体. 去掉这个设置编译, 就看到不同了.
+\definecolor{MyGray}{rgb}{0.8,0.8,0.8}
+\setbeamertemplate{navigation symbols}{\textcolor{MyGray}{CSC5240 Paper Presentation}
+~~%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\insertframenumber  / \inserttotalframenumber ~~}   %% 去掉页面下方默认的导航条.
+%\setbeamertemplate{footline}[page number]
+\setbeamercolor{sidebar}{bg=blue!30} % sidebar的颜色, 50%的蓝色.
+\setbeamercolor{logo}{bg=blue!50}   % logo的颜色
+%%------------------------常用宏包---------------------------------------------------------------------
+%%注意, beamer 会默认使用下列宏包: amsthm, graphicx, hyperref, color, xcolor, 等等
+
+\usepackage{subfigure} %%图形或表格并排排列
+\usepackage{xmpmulti}  %%支持文中的 \multiinclude 等命令, 使 mp 文件逐帧出现. 具体讨论见 beamer 手册.
+\usepackage{colortbl,dcolumn}     %% 彩色表格
+\graphicspath{{figures/}}         %% 图片路径. 本文的图片都放在这个文件夹里了.
+\DeclareGraphicsRule{*}{pdf}{*}{} %% 使 pdflatex 可以纳入 metapost 做的图片.
+
+\logo{\includegraphics[height=0.09\textwidth]{logo.pdf}}%% 校徽
+
+\renewcommand{\raggedright}{\leftskip=0pt \rightskip=0pt plus 0cm}
+\raggedright %% 中文对齐
+
+\def\hilite<#1>{\temporal<#1>{\color{blue!35}}{\color{magenta}}{\color{blue!75}}}
+%% 自定义命令, 源自 beamer_guide. item 逐步显示时, 使已经出现的item、正在显示的item、将要出现的item 呈现不同颜色.
+
+\newcolumntype{H}{>{\columncolor{blue!20}}c!{\vrule}}
+\newcolumntype{H}{>{\columncolor{blue!20}}c}  %% 表格设置
+%==================================参考文献==============================================================
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}  %自定义命令\upcite, 使参考文献引用以上标出现
+\bibliographystyle{plain}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%重定义字体、字号命令 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % 字号设置
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % 字号设置
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % 字号设置
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % 字号设置
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\CSE}{\href{http://www.cse.cuhk.edu.hk}{Department of Computer Science and Engineering}}
+\newcommand{\CUHK}{\href{http://www.cuhk.edu.hk}{The Chinese University of Hong Kong}}
+\newcommand{\mymail}{\href{mailto:zgxiao@cse.cuhk.edu.hk}{\textcolor{blue}{\underline{zgxiao@cse.cuhk.edu.hk}}}}
+\newcommand{\myname}{XIAO Zigang}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{CSC5240 Paper Presentation}
+\subtitle{Understanding Random SAT:\\Beyond the Clauses-to-Variables Ratio}
+\author[ ]{\myname\\\mymail}
+\institute{\wuhao \textcolor{black}{\CSE\\\CUHK}}
+\date{November 14th, 2008}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{% general command to set parameter(s)
+        language=C,                     % C language synthx
+        morekeywords={cout, using, _complex},   % add keywords
+        keywordstyle=\color{blue},      % 关键词着色
+        commentstyle=\color{violet},     % black comments
+        captionpos=b,
+        frame=single,
+        stringstyle=\color{gray},                % typewriter type for strings
+        basicstyle=\tiny,               % print whole listing tiny
+        identifierstyle=,               % nothing happens
+        tabsize=4,                      % 制表符的空格数
+        stepnumber=1,
+        numbersep=5pt,
+        keepspaces=true,                % 保留空格
+        showspaces=false,               % 是否显示空格为一朝上的小方框
+        showstringspaces=false,         % 是否显示字符串中的空格为一朝上的小方框
+        escapeinside={/*@}{@*/}         % 用/*@label@*/标示指定代码行，
+                                        % 可以用\ref{label}引用
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\frame{\titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Outline
+\section[Outline]{Outline}
+\frame{\frametitle{Outline}\tableofcontents}
+
+%\begin{comment}
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[current,currentsubsection]
+  \end{frame}
+}
+%\end{comment}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\subsection{Contribution}
+\begin{frame}
+\frametitle{Contribution of their work}
+\begin{enumerate}
+  \item Fact:
+  \begin{itemize}
+    \item Empirical hardness of k-SAT is \textbf{correlated} with ratio of \textbf{clauses to variables}($c/v$)
+  \end{itemize}
+  \item Goal:
+  \begin{itemize}
+    \item Use \textbf{inexpensive computable feature} to predict runtime
+    \item Use \textit{hardness model} to \textbf{choose} algorithm per instance
+  \end{itemize}
+  \item Approach:
+  \begin{itemize}
+    \item Identify features using machine learning
+    \item Build models using previous result
+    \item Construct an algorithm portfolio
+    \item Predict algorithm runtime and choose best
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\subsection{SAT}
+\begin{frame}
+\frametitle{SAT,3-SAT and SAT solver}  % in the top bar
+\begin{itemize}
+  \item SATisfiability: Given a formula of the propositional calculus,
+  decide if there is an \textbf{assignment} to its variables that \textbf{makes the formula true}
+  \begin{itemize}
+    \item e.g. $(x_1 \land x_2) \lor ((x1 \land \neg x_3) \land (x_3 \lor \neg x_4) )$
+  \end{itemize}
+  \item Important in Computer Science, especially AI
+  \begin{itemize}
+    \item Simple, fundamental
+    \item Prototypical \textit{NP-hard problem}
+          \footnote{\tiny Cook, Stephen ,The complexity of theorem proving procedures,
+                    Proc. of 3rd ACM Symposium on Theory of Computing, 151-158,1971}
+    \item Can be \textbf{reduced} to many other NPC problem
+  \end{itemize}
+  \item 3-SAT: \textit{conjunctive normal form} with 3 variables per clause
+  \begin{itemize}
+    \item parameter: $n$ variables, $c$ clauses and $v$ variables per clause
+    \item e.g. $n=5,c=2,v=3$
+    \item $(x_1 \lor \neg x_2 \lor x_5) \land (x_2 \lor x_3 \lor \neg x_4) $
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{comment}
+\begin{frame}
+\frametitle{Algorithm and SAT solver}
+\begin{itemize}
+  \item Davis-Putnam-Logemann-Loveland algorithm (DPLL)
+  \item SAT solver: software package to solve SAT problems
+  \begin{itemize}
+    \item Minisat
+    \item kcnfs
+    \item Satzoo
+    \item etc.
+  \end{itemize}
+  \item Problem: 3-SAT is NPC, no polynomial time algorithm
+  \begin{itemize}
+    \item in some case it may be \textbf{easy} to solve, while sometimes \textbf{not}
+  \end{itemize}
+  \item Is there a way to evaluate the instance itself?
+\end{itemize}
+\end{frame}
+\end{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{$c/v$ Ratio}
+\begin{frame}
+\frametitle{Really hard problems
+  \footnote{\tiny Cheeseman,Kanefsky,Taylor,Where the really hard problems are, In Proc. IJCAI-1991,331-337,1991}
+}
+\begin{itemize}
+  \item ``Phase Transition''
+    \footnote{\tiny R Monasson, R Zecchina, S Kirkpatrick, B Selman, Lidor Troyansky,
+    Determining computational complexity from characteristic `phase transitions',
+    Nature,1999
+    }
+  : \textbf{hardness} of random instances of various NPC problems
+  \item Conjecture:
+  \begin{itemize}
+    \item All NPC problems have at least one \textbf{order parameter(op)}
+    \item Instances become hard when \textbf{op} is around a critical value
+  \end{itemize}
+  \item The critical value separate regions:
+  \begin{itemize}
+    \item \textit{over-constrained}
+    \item \textit{under-constrained}
+  \end{itemize}
+  \item \textbf{Preserved} when reducing different hard problems
+  \begin{itemize}
+    \item e.g. hard to color K-col graphs $\rightarrow$ hard to solve K-sat
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Intuitive understanding of boundary value}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{undercon.pdf}
+\caption{Illustration of \textit{under-constrained}}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Intuitive understanding of boundary value(cont.)}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{overcon.pdf}
+\caption{Illustration of \textit{over-constrained}}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Intuitive understanding of boundary value(cont.)}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{hard.pdf}
+\caption{Illustration of \textit{in between} formulas}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generating hard problems}
+\begin{itemize}
+  \item Selman et al. distinguish two instance distribution of SAT
+  \footnote{\tiny Selman,Mitchell,Levesque,Generating hard satisfiability problems,
+   \textit{Artificial Intelligence} 81(1-2):17-29.1996}
+   \begin{itemize}
+     \item Fixed clause-length (3-SAT)
+     \begin{itemize}
+       \item hard when reaching boundary value
+     \end{itemize}
+     \item Constant-density model($P(x_i)$=p)
+     \begin{itemize}
+       \item easy anyway
+     \end{itemize}
+   \end{itemize}
+  \item ``50\% satisfiable'' point
+  \begin{itemize}
+    \item occur at \textbf{fixed ratio} of $c/v : 4.26$
+  \end{itemize}
+  \item Implication: larger formula is \textbf{not necessarily} harder
+  \item Algorithm: \textit{Worst case analysis} vs. \textit{empirical behavior}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ratio of clauses-to-variables
+\footnote{\tiny Selman,Mitchell,Levesque,Generating hard satisfiability problems,
+   \textit{Artificial Intelligence} 81(1-2):17-29.1996}}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{cv.pdf}
+\caption{Median DP calls for 50-variable Random 3-SAT as a function of the ratio of clauses-to-variables}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ratio of clauses-to-variables
+\footnote{\tiny Selman,Mitchell,Levesque,Generating hard satisfiability problems,
+   \textit{Artificial Intelligence} 81(1-2):17-29.1996}
+}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{prob.pdf}
+\caption{Probability of satisfiability of 50-variable formulas,
+as a function of the ratio of clauses-to-variables.}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Supervised learning is a machine learning technique for learning a function from training data.
+%The training data consist of pairs of input objects (typically vectors), and desired outputs.
+%The output of the function can be a continuous value (called regression),
+%or can predict a class label of the input object (called classification).
+
+\section{Hardness Model}
+\subsection{Idea}
+\begin{frame}[fragile]
+\frametitle{Building Empirical Hardness Model}
+\begin{figure}
+\centering
+\subfigure[]{\includegraphics[height=0.75\textheight]{modelflow.pdf}}
+\subfigure[]{\includegraphics[height=0.6\textheight]{learning.pdf}}
+\caption{Construction of Empirical Hardness Model}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Basic idea}
+\begin{itemize}
+  \item Use supervised learning
+  \begin{itemize}
+    \item Choose a function from a given hypothesis space
+    \begin{itemize}
+      \item $f: feature^n \rightarrow run\_time$
+      \item Minimize a given error metric
+    \end{itemize}
+  \end{itemize}
+  \item Their approach:
+  \begin{itemize}
+    \item Regression technique: \textit{linear regression(LR)}
+    \item Error metric: \textit{root mean squared error(RMSE)}
+  \end{itemize}
+  \item LR is appealing due to the small computational cost
+  \begin{itemize}
+    \item Choosing a good hypothesis space
+    \item Choosing an appropriate error metric
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Extending linear regression}
+  LR seems quite limited,but can be extended:
+  \begin{enumerate}
+    \item By including all pairwise products of features, e.g. $C_n^2$
+    \begin{itemize}
+      \item Resulting \textit{quadratic manifold} in the original feature space
+      \item Only $k$ most important features' pairwise products to avoid becoming \textit{intractable}
+    \end{itemize}
+    \item By transforming \textit{non-linear}(e.g.sigmoid) to \textit{linear}
+    \begin{itemize}
+      \item Suppose hypothesis spaces of the form $h(y)$
+      \item Replace response variable $y$ by inverse function $h^{-1}$
+      \item Besides linear model,exponential and logistic models are used
+      \begin{itemize}
+        \item $h(y)=10^y;h^{-1}(y)=log_{10}(y)$
+        \item $h(y)=1/(1+e^{-y});h^{-1}(y)=ln(y)ln(1-y)$
+      \end{itemize}
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\subsection{SAT model}
+\begin{frame}
+\frametitle{Features}
+\begin{itemize}
+  \item Totally $91$ features used,divided into 9 groups
+\end{itemize}
+\begin{figure}
+\centering
+    \includegraphics[width=0.8\textwidth]{feature.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Building smaller models}
+\begin{enumerate}
+  \item Discard \textbf{highly correlated} or \textbf{uninformative} features
+  \begin{itemize}
+    \item e.g. when $c/v$ is fixed, $(c/v),(c/v)^2$ etc. is not needed
+  \end{itemize}
+  \item Use statistical technique to evaluate \textbf{importance} of features
+  \begin{itemize}
+    \item Compute \textit{cost of omission} (with \& without)
+    \item Use \textit{cross-validation} (split dataset)
+  \end{itemize}
+  \item Choose appropriate small \textbf{subset}
+\footnote{\tiny K. Leyton-Brown, E. Nudelman, and Y. Shoham.
+Learning the empirical hardness of optimization problems:
+The case of combinatorial auctions. In Proc. CP-2002, pages 556-572,2002.}
+\begin{figure}
+\centering
+\subfigure[\tiny subset size vs. RMSE]{\includegraphics[width=0.3\textwidth,angle=-90]{subset.pdf}}
+\subfigure[\tiny Feature omission example]{\includegraphics[width=0.3\textwidth,angle=-90]{omission.pdf}}
+\end{figure}
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiment}
+\subsection{Setup}
+\begin{frame}
+\frametitle{Experimental Setup}
+\begin{itemize}
+  \item Two dataset:
+  \begin{itemize}
+    \item 20000 uniform random 3-SAT instances with 400 variables
+    \begin{itemize}
+      \item Varied ratio: $C/V\in[3.26,5.26]$
+    \end{itemize}
+    \item 20000 uniform random 3-SAT instances with 400 variables,1704 clauses
+    \begin{itemize}
+      \item Fixed ratio: $C/V=4.26$
+    \end{itemize}
+    \item Each dataset split into 3 parts
+    \begin{itemize}
+      \item training (for tuning)
+      \item test (for testing)
+      \item validation (for tuning)
+    \end{itemize}
+  \end{itemize}
+  \item Three algorithms:
+  {\tt
+    \begin{itemize}
+        \item ksnfs
+        \item oksolver
+        \item satz
+    \end{itemize}
+  }
+  \item Platform: 2.4GHz Xeon processors, Linux 2.4.20
+  \item Machine learning tools: $R$ and $Matlab$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Variable-ratio}
+\begin{frame}
+\frametitle{Building different models}
+\begin{figure}
+\includegraphics[width=0.2\textwidth,angle=-90]{kcnfs.pdf}
+\caption{\tiny Actual vs. predicted runtimes for {\tt kcnfs} in quadratic case}
+\end{figure}
+\begin{itemize}
+  \item linear,logistic,exponential models + 91 features
+  \begin{itemize}
+    \item Linear the worst
+    \item Others similar, \textbf{logistic} slightly better
+  \end{itemize}
+  \item Consider quadratic expansion of features. After expansion, preserve 360 features
+  \begin{itemize}
+    \item All three are better
+    \item \textbf{Logistic} the best
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Decrease subset size}
+\begin{figure}
+\includegraphics[width=0.3\textwidth,angle=-90]{subsetsize.pdf}
+\caption{\tiny RMSE as a function of subset size}
+\end{figure}
+\begin{itemize}
+  \item We want a small subset containing \textbf{core} features
+  \begin{itemize}
+    \item \textbf{Sufficient} to approximate full model
+    \item \textbf{Computing time} also decreases
+  \end{itemize}
+  \item Enumerate subset size and calculate RMSE
+  \begin{itemize}
+    \item Choose smallest subset at which \textbf{little incremental benefit} can be gained
+    \item Subset of size 4,RMSE=19.42 is chosen here
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Identifying important features:\textit{cost of omission}}
+\begin{table}
+\includegraphics[width=0.9\textwidth]{size4feature.pdf}
+\caption{\tiny Variable importance in size 4 model for variable-ratio instances}
+\end{table}
+\begin{itemize}
+  \item The most important one is $c/v$ ratio, supporting ``phase transition''
+  \item Note that the remaining feature are \textbf{local search probing feature}
+  \begin{itemize}
+    \item Suggests local minima corresponds to large subtrees with no solution
+  \end{itemize}
+  \item Also note that we may explore new understanding from remaining feature
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction on satisfiable and unsatisfiable}
+\begin{figure}
+\includegraphics[height=0.3\textheight]{predictsat.pdf}
+\caption{\tiny Actual vs. predicted runtimes for \tt kcnfs on satisfiable instances}
+\includegraphics[height=0.3\textheight]{predictunsat.pdf}
+\caption{\tiny Actual vs. predicted runtimes for \tt kcnfs on unsatisfiable instances}
+\end{figure}
+\end{frame}
+
+\subsection{Fixed-Ratio}
+\begin{frame}
+\frametitle{Fixed-Ratio experiment}
+\begin{figure}
+\centering
+\subfigure[\tiny fixed-ratio predict runtime]{\includegraphics[width=0.2\textwidth,angle=-90]{fixedpredict.pdf}}
+\subfigure[\tiny RMSE as a function of subset size]{\includegraphics[width=0.2\textwidth,angle=-90]{fixedsubset.pdf}}
+\includegraphics[width=0.5\textwidth]{fixedratiofeature.pdf}
+\end{figure}
+\begin{itemize}
+  \item What if we \textbf{fix} clause-to-variable?
+  \item Challenge: identifying other features for hardness
+  \item Again we reached the best using logistic model in quadratic expansion
+  \begin{itemize}
+    \item Dominant feature: local search and DPLL probing features
+    \item Captures the degree to which a given instance has ``almost'' satisfying assignments
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+\subsection{Application}
+\begin{frame}
+\frametitle{Application of Empirical Hardness Model}
+\begin{enumerate}
+  \item Harder instance generator of random 3-SAT
+  \item Construction of algorithm portfolios -- SATzilla
+  \begin{itemize}
+    \item Consists of {\tt 2clseq, eqSatz, HeerHugo, JeruSat,\ldots}
+    \item Win award in SAT competition
+    \item Newer version in 2007: SATzilla 07
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{SATzilla}
+\begin{figure}
+\centering
+\includegraphics[height=0.85\textheight]{satzilla.pdf}
+\caption{Work flow of SATzilla}
+\end{figure}
+\end{frame}
+
+\subsection{Future Work}
+\begin{frame}[fragile]
+\frametitle{Conclusion and future work}
+\begin{itemize}
+  \item Empirical hardness model is valuable for the study of empirical behavior of complex algorithm
+  \item Future work:
+    \begin{enumerate}
+        \item Apply empirical hardness model to stochastic search algorithm
+        \item Build stronger structural/hierachical model
+        \item Study how some features cause instance to be hard or easy for certain types of algorithms
+    \end{enumerate}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Q \& A}
+\frame{
+\frametitle{Q \& A and Acknowledgement}
+\begin{center}
+{\Huge - Thank You - }
+\end{center}
+\begin{itemize}
+\item
+Thanks to Nudelman et al. for their excellent work
+\item
+Thanks to \emph{HUANG Zheng-hua} in \emph{Wuhan University} for providing this beamer template(adapted)
+\end{itemize}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+\begin{comment}
+  \begin{itemize}
+    \item three SAT-solvers
+    \begin{itemize}
+      \item kcnfs
+      \item oksolver
+      \item satz
+    \end{itemize}
+    \item two ditributions
+    \begin{itemize}
+      \item uniform random 3-SAT with varying ratio of c-v
+      \item uniform random 3-SAT with fixed ratio of c-v
+    \end{itemize}
+  \end{itemize}
+\end{comment}

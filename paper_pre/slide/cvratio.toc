@@ -1,0 +1,17 @@
+\beamer@endinputifotherversion {3.06pt}
+\beamer@sectionintoc {1}{Outline}{2}{0}{1}
+\beamer@sectionintoc {2}{Introduction}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Contribution}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{SAT}{5}{0}{2}
+\beamer@subsectionintoc {2}{3}{$c/v$ Ratio}{7}{0}{2}
+\beamer@sectionintoc {3}{Hardness Model}{15}{0}{3}
+\beamer@subsectionintoc {3}{1}{Idea}{15}{0}{3}
+\beamer@subsectionintoc {3}{2}{SAT model}{19}{0}{3}
+\beamer@sectionintoc {4}{Experiment}{22}{0}{4}
+\beamer@subsectionintoc {4}{1}{Setup}{22}{0}{4}
+\beamer@subsectionintoc {4}{2}{Variable-ratio}{24}{0}{4}
+\beamer@subsectionintoc {4}{3}{Fixed-Ratio}{29}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{31}{0}{5}
+\beamer@subsectionintoc {5}{1}{Application}{31}{0}{5}
+\beamer@subsectionintoc {5}{2}{Future Work}{34}{0}{5}
+\beamer@sectionintoc {6}{Q \& A}{36}{0}{6}

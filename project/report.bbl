@@ -1,0 +1,69 @@
+\begin{thebibliography}{10}
+
+\bibitem{verpoorte2003mmm}
+E.~Verpoorte and NF~De~Rooij.
+\newblock {Microfluidics meets MEMS}.
+\newblock {\em Proceedings of the IEEE}, 91(6):930--953, 2003.
+
+\bibitem{bohringer2003osm}
+K.F. Bohringer.
+\newblock Optimal strategies for moving droplets in digital microfluidic
+  systems.
+\newblock In {\em Seventh International Conference on Miniaturized Chemical and
+  Biochemical Analysis Systems (MicroTAS'03)}, 2003.
+
+\bibitem{bohringer2006mac}
+KF~Bohringer.
+\newblock Modeling and controlling parallel tasks in droplet-based microfluidic
+  systems.
+\newblock {\em IEEE TRANSACTIONS ON COMPUTER AIDED DESIGN OF INTEGRATED
+  CIRCUITS AND SYSTEMS}, 25(2):329, 2006.
+
+\bibitem{1326232}
+Ping-Hung Yuh, Chia-Lin Yang, and Yao-Wen Chang.
+\newblock Bioroute: a network-flow based routing algorithm for digital
+  microfluidic biochips.
+\newblock In {\em ICCAD '07: Proceedings of the 2007 IEEE/ACM international
+  conference on Computer-aided design}, pages 752--757, Piscataway, NJ, USA,
+  2007. IEEE Press.
+
+\bibitem{1353672}
+Minsik Cho and David~Z. Pan.
+\newblock A high-performance droplet router for digital microfluidic biochips.
+\newblock In {\em ISPD '08 Proceedings of the 2008 international symposium on
+  Physical design}, pages 200--206, New York, NY, USA, 2008. ACM.
+
+\bibitem{griffith2006pcr}
+E.J. Griffith, S.~Akella, and M.K. Goldberg.
+\newblock Performance characterization of a reconfigurable planar-array digital
+  microfluidic system.
+\newblock {\em IEEE TRANSACTIONS ON COMPUTER AIDED DESIGN OF INTEGRATED
+  CIRCUITS AND SYSTEMS}, 25(2):340, 2006.
+
+\bibitem{1266484}
+Tao Xu and Krishnendu Chakrabarty.
+\newblock A cross-referencing-based droplet manipulation method for
+  high-throughput and pin-constrained digital microfluidic arrays.
+\newblock In {\em DATE '07: Proceedings of the conference on Design, automation
+  and test in Europe}, pages 552--557, San Jose, CA, USA, 2007. EDA Consortium.
+
+\bibitem{yuh2008pib}
+P.H. Yuh, S.~Sapatnekar, C.L. Yang, and Y.W. Chang.
+\newblock A progressive-ilp based routing algorithm for cross-referencing
+  biochips.
+\newblock In {\em Design Automation Conference, 2008. DAC 2008. 45th ACM/IEEE},
+  pages 284--289, 2008.
+
+\bibitem{erdmannmovingobj}
+Michael Erdmann and Tom¨¢s Lozano-P¨¦rez.
+\newblock On multiple moving objects.
+\newblock {\em Algorithmica}, 2(1):477--521, November 1987.
+
+\bibitem{1189844}
+Shih-Kang Fan, C.~Hashi, and Chang-Jin Kim.
+\newblock Manipulation of multiple droplets on n×m grid by cross-reference
+  ewod driving scheme and pressure-contact packaging.
+\newblock {\em Micro Electro Mechanical Systems, 2003. MEMS-03 Kyoto. IEEE The
+  Sixteenth Annual International Conference on}, pages 694--697, Jan. 2003.
+
+\end{thebibliography}
